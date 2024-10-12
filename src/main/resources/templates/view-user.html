@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Detalhes do Usuário</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Estilos customizados -->
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+	<!-- Fontes -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+		rel="stylesheet">
+</head>
+<body class="bg-light body-font-nunito">
+	<!-- Menu de navegação -->
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-light bg-white">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">Minha App</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+					aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item">
+							<a class="nav-link" th:href="@{/produtos}"></a>
+						</li>
+						<!-- Pedidos -->
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="pedidosDropdown" role="button"
+								data-bs-toggle="dropdown" aria-expanded="false">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+									fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+									stroke-linejoin="round" class="feather feather-file">
+									<path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+									<polyline points="13 2 13 9 20 9"></polyline>
+								</svg>
+								Pedidos
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="pedidosDropdown">
+								<li><a class="dropdown-item" href="#">Criar Pedido</a></li>
+								<li><a class="dropdown-item" href="#">Editar Pedido</a></li>
+								<li><a class="dropdown-item" href="#">Visualizar Pedidos</a></li>
+								<li><a class="dropdown-item" href="#">Excluir Pedido</a></li>
+							</ul>
+						</li>
+						<!-- Produtos -->
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="produtosDropdown" role="button"
+								data-bs-toggle="dropdown" aria-expanded="false">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+									fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+									stroke-linejoin="round" class="feather feather-shopping-cart">
+									<circle cx="9" cy="21" r="1"></circle>
+									<circle cx="20" cy="21" r="1"></circle>
+									<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+								</svg>
+								Produtos
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="produtosDropdown">
+								<li><a class="dropdown-item" href="#">Criar Produto</a></li>
+								<li><a class="dropdown-item" href="#">Editar Produto</a></li>
+								<li><a class="dropdown-item" href="#">Visualizar Produtos</a></li>
+								<li><a class="dropdown-item" href="#">Excluir Produto</a></li>
+							</ul>
+						</li>
+						<!-- Clientes -->
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="clientesDropdown" role="button"
+								data-bs-toggle="dropdown" aria-expanded="false">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+									fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+									stroke-linejoin="round" class="feather feather-users">
+									<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+									<circle cx="9" cy="7" r="4"></circle>
+									<path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+									<path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+								</svg>
+								Clientes
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="clientesDropdown">
+								<li><a class="dropdown-item" href="register-user">Cadastrar Usuário</a></li>
+								<li><a class="dropdown-item" href="edit-user">Editar Usuário</a></li>
+								<li><a class="dropdown-item" href="view-user">Visualizar Usuário</a></li>
+								<li><a class="dropdown-item" href="delete-user">Excluir Usuário</a></li>
+							</ul>
+						</li>
+						<li class="nav-item">
+							<form th:action="@{/logout}" method="post" class="d-inline">
+								<button type="submit" class="btn btn-danger">Logout</button>
+							</form>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<!-- Container principal -->
+	<div class="container-fluid bg-light">
+		<div class="row">
+			<!-- Nav Lateral -->
+			<nav th:replace="~{partials/admin/sidebar-user :: sidebar}"></nav>
+			<!-- Conteúdo principal -->
+			<main class="col-md-9">
+				<!-- Apresentação de boas-vindas -->
+				<div class="text-center my-5">
+					<h1 class="display-4 font-weight-bold text-primary text-dark">ADMINISTRADOR</h1>
+					<p class="lead">Bem-vindo ao painel do administrador. Use o menu para navegar e gerenciar usuários.
+					</p>
+				</div>
+				
+				<!-- Formulário de busca pelo usuário -->
+				<div class="container mt-5 pb-5">
+				    <div class="row justify-content-center">
+				        <div class="col-md-16">
+				            <div class="card shadow-lg">
+				                <div class="card-body">
+				                    <h2 class="card-title text-center text-primary text-dark mb-4">Buscar usuário</h2>
+				                    <form th:action="@{/admin/view-user}" th:object="${searchForm}" method="post">
+				                        <div class="form-group mb-3">
+				                            <label for="username" class="form-label">Username</label>
+				                            <input type="text" id="username" name="username" class="form-control" th:field="*{username}">
+				                        </div>
+				                        <div class="form-group mb-3">
+				                            <label for="email" class="form-label">Email</label>
+				                            <input type="text" id="email" name="email" class="form-control" th:field="*{email}">
+				                        </div>
+				                        <div class="form-group mb-3">
+				                            <label for="id" class="form-label">ID</label>
+				                            <input type="number" id="id" name="id" class="form-control" th:field="*{id}">
+				                        </div>
+				                        <div class="form-group mb-3">
+				                            <label for="role" class="form-label">Tipo de Usuário</label>
+				                            <select id="role" name="role" class="form-control" th:field="*{role}">
+				                                <option value="ALL">Todos</option>
+				                                <option value="ROLE_CLIENT">Cliente</option>
+				                                <option value="ROLE_ADMIN">Administrador</option>
+				                            </select>
+				                        </div>
+				                        <div class="form-group mb-3">
+				                            <label for="limit" class="form-label">Quantidade de Resultados</label>
+				                            <input type="number" id="limit" name="limit" class="form-control" th:field="*{limit}" min="1">
+				                        </div>
+				                        <div>
+				                            <button class="btn btn-primary btn-lg" type="submit">Buscar</button>
+				                        </div>
+				                    </form>
+				                </div>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+				
+				<!-- Formulário de resultado da busca -->
+				<div class="container mt-5">
+				    <h2>Resultados da Busca</h2>
+				    <table class="table table-bordered">
+				        <thead>
+				            <tr>
+				                <th>ID</th>
+				                <th>Username</th>
+				                <th>Email</th>
+								<th>Role</th>
+				            </tr>
+				        </thead>
+				        <tbody>
+				            <tr th:each="users : ${users}">
+				                <td th:text="${users.id}"></td>
+				                <td th:text="${users.username}"></td>
+				                <td th:text="${users.email}"></td>
+				                <td th:text="${users.role}"></td>
+				            </tr>
+				        </tbody>
+				    </table>
+				</div>
+			</main>
+		</div>
+	</div>
+	<!-- Script para exibir o modal automaticamente se houver um erro -->
+	<script>
+		window.onload = function () {
+			var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+			if (document.getElementById('errorModal')) {
+				errorModal.show();
+			}
+		}
+	</script>
+	<!-- Bootstrap JS and dependencies (optional if needed for interactions) -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

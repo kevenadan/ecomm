@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Login</title>
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Estilos customizados -->
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-4">
+				<div class="card shadow-lg">
+					<div class="card-body">
+						<h3 class="card-title text-center">Entre para continuar</h3>
+						<form th:action="@{/login}" method="post" th:object="${usuario}">
+							<div th:if="${#fields.hasErrors()}">
+								<div class="alert alert-danger" role="alert">
+									<ul>
+										<li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+									</ul>
+								</div>
+							</div>
+							<div class="form-group mb-3">
+								<label for="username">Username</label>
+								<input type="text" class="form-control" id="username" name="username" required>
+								<div th:if="${#fields.hasErrors('username')}" class="text-danger">
+									<p th:each="err : ${#fields.errors('username')}" th:text="${err}"></p>
+								</div>
+							</div>
+							<div class="form-group mb-3">
+								<label for="password">Password</label>
+								<input type="password" class="form-control" id="password" name="password" required>
+								<div th:if="${#fields.hasErrors('password')}" class="text-danger">
+									<p th:each="err : ${#fields.errors('password')}" th:text="${err}"></p>
+								</div>
+							</div>
+							<div class="d-grid">
+								<button type="submit" class="btn btn-primary btn-block">Login</button>
+							</div>
+							<div th:if="${param.error != null}">
+								<p style="color: red;">Nome de usuário ou senha inválidos.</p>
+							</div>
+						</form>
+						<div class="d-grid py-2">
+								<a class="btn btn-success" th:href="@{/register}">Cadastrar-se</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>

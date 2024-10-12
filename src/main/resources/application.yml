@@ -1,0 +1,28 @@
+spring:
+  # Configurações MySQL        
+  datasource:
+    url: jdbc:mysql://localhost:3306/ecommdb?useTimezone=true&serverTimezone=UTC 
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root               
+    password: root00 
+
+  jpa:
+    hibernate:
+      ddl-auto: update                 
+    properties:
+      dialect: org.hibernate.dialect.MySQLDialect
+      hibernate:
+        format-sql: true 
+        show-sql: true  
+    open-in-view: false
+
+  web: 
+    resources: 
+      static-locations: classpath:/static/    
+
+# Configuração do log (opcional)
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug # Mostra as queries no log em modo debug
